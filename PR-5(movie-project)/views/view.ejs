@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Movie Tickets</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: url('https://t4.ftcdn.net/jpg/02/71/50/69/360_F_271506927_WWFfd92jDIIDx6DgMflakU14o5jRPgBm.jpg') 
+            no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            color: #fff;
+            padding-top: 101px;
+            margin-left: 240px;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 54px;
+            left: 0;
+            width: 240px;
+            height: 100%;
+            background-color: #343a40;
+            padding-top: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar a {
+            color: #fff;
+            padding: 10px 20px;
+            display: block;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: background-color 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #495057;
+        }
+
+        .header {
+            background-color: #343a40;
+            color: #fff;
+            padding: 10px 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .header h1 {
+            display: inline-block;
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .header .search-bar input {
+            border-radius: 20px;
+            padding: 5px 15px;
+            border: none;
+            outline: none;
+        }
+
+        .header .user-actions a {
+            color: #fff;
+            margin-left: 15px;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .header .user-actions a:hover {
+            color: #ff8a00;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 2rem;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 30px;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .card img {
+            border-radius: 10px;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .card-body {
+            text-align: center;
+            color: #343a40;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            color: #252526;
+        }
+
+        .card-text {
+            font-size: 1.1rem;
+            color: #5a5a5a;
+            margin-bottom: 15px;
+        }
+
+        .action-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .action-links a {
+            font-size: 1rem;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            background-color: #2575fc;
+            transition: background-color 0.3s;
+        }
+
+        .action-links a:hover {
+            background-color: #e67300;
+        }
+
+        .pagination {
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .movie-card {
+            margin-bottom: 20px;
+        }
+
+        .price-info {
+            font-size: 1rem;
+            color: #585454;
+            margin-top: 10px;
+        }
+
+        .total-price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #585454;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <a href="/">Dashboard</a>
+        <a href="/add">Add Movie Tickets</a>
+        <a href="/view">View Movie Tickets</a>
+    </div>
+
+    <div class="header d-flex justify-content-between">
+        <h1>Admin Panel</h1>
+        <div class="search-bar">
+            <input type="text" placeholder="Search...">
+        </div>
+        <div class="user-actions">
+            <a href="/profile"><i class="fas fa-user-circle"></i> Profile</a>
+            <a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>View Movie Tickets</h2>
+        <div class="row">
+            <% users.forEach((movie) => { %>
+            <div class="col-md-4 movie-card">
+                <div class="card" data-price="<%= movie.price %>" data-seats="<%= movie.seats %>" data-id="<%= movie.id %>">
+                    <img src="<%= movie.image %>" class="card-img-top" alt="<%= movie.name %> Poster">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= movie.name %></h5>
+                        <p class="price-info">Price per Seat: $<%= movie.price %></p>
+                        <p class="price-info">Total Seats: <%= movie.seats %></p>
+                        <p class="total-price" id="totalPrice_<%= movie.id %>">Total Price: Loading...</p>
+                        <div class="action-links">
+                            <a href="/deleteRecord?id=<%= movie.id %>" class="btn btn-danger">Delete</a>
+                            <a href="/editRecord?id=<%= movie.id %>" class="btn btn-warning">Edit</a>
+                            <a href="/bookticket?id=<%= movie.id %>" class="btn btn-success">Book Ticket</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% }) %>
+        </div>
+    </div>
+
+    <script>
+        const movieCards = document.querySelectorAll('.card');
+
+        movieCards.forEach(card => {
+            const pricePerSeat = parseFloat(card.getAttribute('data-price'));
+            const totalSeats = parseInt(card.getAttribute('data-seats'));
+            const totalPrice = pricePerSeat * totalSeats;
+
+            const totalPriceElement = document.getElementById('totalPrice_' + card.getAttribute('data-id'));
+            totalPriceElement.innerText = 'Total Price: $' + totalPrice.toFixed(2);
+        });
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

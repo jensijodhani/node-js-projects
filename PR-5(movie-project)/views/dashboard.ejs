@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+
+body {
+            background: linear-gradient(to right, #f3f4f6, #e9ecef);
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #343a40;
+            color: #fff;
+            padding: 15px 20px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            display: inline-block;
+        }
+
+        .header .user-actions {
+            float: right;
+        }
+
+        .user-actions a {
+            color: #fff;
+            margin-left: 15px;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        .user-actions a:hover {
+            color: #ff8a00;
+        }
+
+        .sidebar {
+            height: 100vh;
+            background-color: #343a40;
+            color: #fff;
+            position: fixed;
+            top: 60px;
+            width: 240px;
+            padding-top: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 10px 20px;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .sidebar a:hover {
+            background-color: #495057;
+        }
+
+        .content {
+            margin-left: 260px;
+            margin-top: 80px;
+            padding: 20px;
+        }
+
+        .movie-card {
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .movie-card img {
+            width: 100%;
+            height: auto;
+        }
+
+        .movie-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .movie-title {
+            padding: 15px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-align: center;
+            color: #343a40;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>Admin Panel - Dashboard</h1>
+        <div class="user-actions">
+            <a href="/profile"><i class="fas fa-user-circle"></i> Profile</a>
+            <a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+    </div>
+
+    <div class="sidebar">
+        <a href="/">Dashboard</a>
+        <a href="/add">Add Movie Tickets</a>
+        <a href="/view">View Movie Tickets</a>
+    </div>
+
+    <div class="content">
+        <h2>Movie Posters</h2>
+        <div class="row">
+            <% const movies = [
+                { title: "Avengers", poster: "https://rukminim2.flixcart.com/image/750/900/jf8khow0/poster/a/u/h/small-hollywood-movie-poster-blade-runner-2049-ridley-scott-original-imaf3qvx88xenydd.jpeg?q=20&crop=false" },
+                { title: "Pathan", poster: "https://rukminim2.flixcart.com/image/850/1000/xif0q/poster/c/b/d/small-pathan-shah-rukh-khan-bollywood-hindi-movie-poster-small-original-imagmt3dgxh7avyg.jpeg?q=20&crop=false" },
+                { title: "Starwars", poster: "https://images-cdn.ubuy.co.in/63ef0a397f1d781bea0a2464-star-wars-rogue-one-movie-poster.jpg" },
+                { title: "Padmaavat", poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkPyWAq-nCN1JOyUaMOvsEY3pCyxWbubwHCw&s" },
+                { title: "Boot police", poster: "https://e1.pxfuel.com/desktop-wallpaper/322/698/desktop-wallpaper-upcoming-hindi-film-movie-posters-bollywood-2022-movie.jpg" },
+                { title: "Singham Again", poster: "https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC/et00354858-njsmtljekp-portrait.jpg" },
+                { title: "Pushpa 2", poster: "https://stat5.bollywoodhungama.in/wp-content/uploads/2024/04/Pushpa-2-%E2%80%93-The-Rule-352x458.jpg" },
+                { title: "Shadow and bone", poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLsYAAENw6Su637HklRSkS26Iv3LMGI5Hr4LMzTcyye1SzJnXhXiddcvFi2FUSSUqFDE4&usqp=CAU" },
+                { title: "Naadi Dosh", poster: "https://static.toiimg.com/photo/92078432.cms" },
+                { title: "Kale lagan che!?!", poster: "https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC/et00408860-hgzgldankj-portrait.jpg" },
+                { title: "sasan", poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT25c6UkuM6F1j9KSF-S4_BoQ0bEbcOHk9rmg&s" },
+                { title: "Karkhanu", poster: "https://assets-in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/karkhanu-et00398971-1719583542.jpg" },
+
+            ]; movies.forEach(movie => { %>
+            <div class="col-md-3 mb-4">
+                <div class="movie-card">
+                    <img src="<%= movie.poster %>" alt="<%= movie.title %> Poster">
+                    <div class="movie-title"><%= movie.title %></div>
+                </div>
+            </div>
+            <% }) %>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
+
+

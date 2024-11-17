@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Your Tickets</title>
+    <style>
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #3acfd5; 
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            flex-direction: column;
+        }
+
+        h2 {
+            font-size: 3rem;
+            font-weight: bold;
+            text-align: center;
+            color: #fff;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .done {
+            font-size: 4rem;
+            color: #fff;
+            position: relative;
+            text-align: center;
+            animation: show-done 1s ease-out forwards;
+        }
+
+        @keyframes show-done {
+            0% { opacity: 0; transform: scale(0); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .done::before {
+            content: '✓';
+            font-size: 5rem;
+            color: #fff;
+        }
+
+        .button {
+            background-color: #f8b400;
+            color: white;
+            font-size: 1.2rem;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+        }
+
+        .button:hover {
+            background-color: #e09300;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h2>Book Your Tickets</h2>
+    <div class="done"></div>
+
+    <a href="/" class="button">Back to Dashboard</a>
+
+</body>
+</html>
