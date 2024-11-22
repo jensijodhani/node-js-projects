@@ -8,10 +8,6 @@ app.set('view engine', 'ejs')
 
 const db = require('./config/db')
 
-const cookieParser = require('cookie-parser')
-
-app.use(cookieParser());
-
 const path = require('path');
 
 app.use(express.urlencoded());

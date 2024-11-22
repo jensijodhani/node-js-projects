@@ -28,6 +28,4 @@ routes.post('/updateRecord', upload, updateRecord);
 routes.get('/bookticket', bookTicket);
 
 module.exports = upload;
-
-
 module.exports = routes;
