@@ -48,7 +48,7 @@
                 color: #ffc107;
             }
 
-            .movie-card {
+            .product-card {
                 background: #ffffff;
                 border-radius: 10px;
                 box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -56,17 +56,17 @@
                 transition: transform 0.3s ease, box-shadow 0.3s ease;
             }
 
-            .movie-card img {
+            .product-card img {
                 width: 100%;
                 height: auto;
             }
 
-            .movie-card:hover {
+            .product-card:hover {
                 transform: scale(1.05);
                 box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
             }
 
-            .movie-title {
+            .product-title {
                 padding: 15px;
                 font-size: 1.1rem;
                 font-weight: bold;
@@ -139,7 +139,7 @@
                 margin-top: 80px;
                 padding: 20px;
             }
-            .movie-description {
+            .product-description {
             font-size: 0.9rem;
             color: #6c757d;
             text-align: center;
@@ -152,7 +152,7 @@
         <div class="sidebar">
             <a href="/dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
             <a href="/add-product"><i class="fas fa-plus"></i> Add Product</a>
-            <a href="/view-products"><i class="fas fa-box-open"></i> View Products</a>
+            <a href="/view"><i class="fas fa-box-open"></i> View Products</a>
         </div>
 
         <div class="header">
@@ -209,7 +209,7 @@
             </div>
 
             <div class="row">
-                <% const movies = [ 
+                <% const products = [ 
                     { 
                         title: "Cars",
                         poster: "https://i.pinimg.com/736x/18/b4/69/18b4692e6a7c7b8eea41ca4ab44684c2.jpg",
@@ -231,16 +231,16 @@
                         description: "Top-notch makeup products for flawless beauty and skincare."
                     } 
                 ];
-                movies.forEach(movie => { %>
+                products.forEach(product => { %>
                     <div class="col-md-3 mb-4">
-                        <div class="movie-card">
-                            <img src="<%= movie.poster %>" alt="<%= movie.title %> Poster">
-                            <div class="movie-title">
-                                <%= movie.title %>
+                        <div class="product-card">
+                            <img src="<%= product.poster %>" alt="<%= product.title %> Poster">
+                            <div class="product-title">
+                                <%= product.title %>
                             </div>
-                            <div class="movie-description">
-                                <%= movie.description.substring(0, 50) %>...
-                                <a href="/product/<%= movie.title %>">Read More</a>
+                            <div class="product-description">
+                                <%= product.description.substring(0, 50) %>...
+                                <a href="/product/<%= product.title %>">Read More</a>
                             </div>
                         </div>
                     </div>

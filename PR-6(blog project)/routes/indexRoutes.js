@@ -3,7 +3,7 @@ const express = require('express');
 const routes = express.Router();
 
 const { loginPage, registerPage, dashboardPage, registerUser, loginUser, logoutUser, carProduct, bikeProduct, cycleProduct, makeupProduct,  
-    // addProduct, addRecord, deleteRecord, viewPage, editRecord, updateRecord
+    addProduct, addRecord, deleteRecord, viewPage, editRecord, updateRecord
  } = require('../controllers/AuthController');
 
 const multer = require('multer');
@@ -31,12 +31,12 @@ routes.get('/product/Bikes',bikeProduct)
 routes.get('/product/Cycles',cycleProduct)
 routes.get('/product/Makeup%20Products',makeupProduct)
 
-// routes.get('/add-product',addProduct)
-// routes.post('/insertRecord', upload, addRecord);
-// routes.get('/deleteRecord', deleteRecord);
-// routes.get('/view', viewPage);
-// routes.get('/editRecord', editRecord);
-// routes.post('/updateRecord', upload, updateRecord);
+routes.get('/add-product',addProduct)
+routes.post('/insertRecord', upload, addRecord);
+routes.get('/deleteRecord', deleteRecord);
+routes.get('/view', viewPage);
+routes.get('/editRecord', editRecord);
+routes.post('/updateRecord', upload, updateRecord);
 
 
-module.exports = routes;
+module.exports = routes; 
