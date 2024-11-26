@@ -1,44 +1,164 @@
-const UserModel = require('../models/UserModel');
-const loginPage = (req, res) => {
-    if (res.locals.users) {
-        return res.redirect('dashboard')
-    }
-    return res.render('index')
+
+const usermodels = require('../models/UserModel')
+
+const path = require('path')
+const fs = require('fs')
+const bloguser = require('../models/blogsdata')
+
+const registerpage = (req, res) => {
+    return res.render('res')
 }
-const loginUser = (req, res) => {
-    return res.redirect('dashboard')
+const loginpage = (req, res) => {
+    return res.render('login')
 }
-const dashboardPage = (req, res) => {
-    return res.render('dashboard')
-}
-const registerPage = (req, res) => {
-    return res.render('register');
-}
-const registerUser = async (req, res) => {
+
+const registerusers = async (req, res) => {
     try {
-        const { name, email, password } = req.body;
-        await UserModel.create({
+        const { name, email, password } = req.body
+        await usermodels.create({
             name: name,
             email: email,
-            password: password
+            password: password,
         })
-        console.log("user successfully create");
-        return res.redirect('/');
+        return res.redirect('/login')
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const loginuser = async (req, res) => {
+    try {
+        const { email, password } = req.body
+        const user = await usermodels.findOne({ email: email });
+
+        if (!user || user.password != password) {
+            console.log("email and password is not match");
+            return false;
+        }
+        res.cookie('auth', user)
+        return res.redirect('/dashboard')
     } catch (err) {
         console.log(err);
         return false;
-
     }
 }
-const logout = (req, res) => {
-    req.logout((err) => {
-        if (err) {
-            console.log(err);
-            return false;
-        }
-        return res.redirect('/');
-    });
+
+const dashboardpage = async (req, res) => {
+    try {
+        const { name, description, image } = req.body
+
+        const user = await bloguser.find({});
+
+        return res.render('dashboard', {
+            user
+        });
+
+    } catch (error) {
+        console.log(err);
+        return false;
+    }
+};
+
+const addblog = (req, res) => {
+    return res.render('add')
 }
+
+const addblougesdata = async (req, res) => {
+    try {
+        const { name, description } = req.body
+        const user = await bloguser.create({
+            name: name,
+            description: description,
+            image: req.file.path
+        })
+        return res.redirect('dashboard')
+    } catch (err) {
+        console.log(err);
+        return false;
+    }
+}
+
+const deletdata = async (req, res) => {
+    try {
+
+        let id = req.params.id;
+        let single = await bloguser.findById(id);
+        fs.unlinkSync(single.image);
+        await bloguser.findByIdAndDelete(req.params.id);
+        console.log(`user delete`)
+        return res.redirect('/dashboard');
+    } catch (err) {
+        console.log(err);
+        return false;
+    }
+}
+
+const editpage = async (req, res) => {
+    try {
+        let id = req.params.id;
+
+        let single = await bloguser.findById(id);
+        return res.render('edit', {
+            single
+        })
+    } catch (err) {
+        console.log(err);
+        return false;
+    }
+}
+
+const update = async (req, res) => {
+    try {
+        const { id, name, description } = req.body;
+        if (req.file) {
+            let single = await bloguser.findById(id);
+            fs.unlinkSync(single.image);
+            await bloguser.findByIdAndUpdate(id, {
+                name: name,
+                description: description,
+                image: req.file.path
+            })
+            console.log("record update");
+            return res.redirect('/dashboard');
+        } else {
+            const { id, name, description } = req.body;
+            let single = await bloguser.findById(id);
+
+            const up = await bloguser.findByIdAndUpdate(id, {
+                name: name,
+                description: description,
+                image: single.image
+            })
+            console.log("user update");
+            return res.redirect('/dashboard')
+        }
+    } catch (err) {
+        console.log(err);
+        return false;
+    }
+}
+
+const logout = async (req, res) => {
+    return res.clearCookie('auth').redirect('/');
+}
+
+const readmore = async (req,res) => {
+    try {
+        let id = req.params.id
+        console.log(id);
+       
+        
+        let single = await bloguser.findById(id);
+        return res.render('readmore', {
+            single
+        })
+    } catch (err) {
+        console.log(err);
+        return false;
+    }
+}
+
+
 module.exports = {
-    loginPage, loginUser, dashboardPage, registerUser, registerPage, logout
+    registerpage, registerusers, loginpage, loginuser, dashboardpage, addblog, addblougesdata, deletdata, editpage, update, logout, readmore
 }
