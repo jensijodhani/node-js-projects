@@ -9,6 +9,9 @@ const registerpage = (req, res) => {
     return res.render('res')
 }
 const loginpage = (req, res) => {
+    if(res.locals.user){
+        return res.redirect('/dashboard')
+    }
     return res.render('login')
 }
 
@@ -45,7 +48,7 @@ const loginuser = async (req, res) => {
 
 const dashboardpage = async (req, res) => {
     try {
-        const { name, description, image } = req.body
+        const { name, description, image } = req.body; 
 
         const user = await bloguser.find({});
 
