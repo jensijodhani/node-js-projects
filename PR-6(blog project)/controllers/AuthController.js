@@ -65,7 +65,7 @@ const addProduct = (req, res) => {
         return res.redirect('/')
     }
     return res.render('add')
-}
+}    
 
 const viewPage = async (req, res) => {
     try {

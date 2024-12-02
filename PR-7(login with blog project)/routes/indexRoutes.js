@@ -27,7 +27,7 @@ routes.get('/dashboard', passport.checkUser, dashboardpage)
 routes.get('/add',passport.checkUser, addblog)
 routes.post('/addblouges',fileUpload, addblougesdata)
 routes.get('/deletdata/:id', deletdata)
-routes.get('/editpage/:id', editpage)
+routes.get('/editpage/:id', editpage) 
 routes.post('/up',fileUpload, update)
 
 routes.get('/logout',logout)
