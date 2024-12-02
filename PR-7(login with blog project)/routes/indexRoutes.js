@@ -24,7 +24,7 @@ routes.post('/ragister', registerusers)
 routes.post('/loginuser', passport.authenticate('local', { failureRedirect: '/' }), loginuser)
 routes.get('/dashboard', passport.checkUser, dashboardpage)
 
-routes.get('/add', addblog)
+routes.get('/add',passport.checkUser, addblog)
 routes.post('/addblouges',fileUpload, addblougesdata)
 routes.get('/deletdata/:id', deletdata)
 routes.get('/editpage/:id', editpage)

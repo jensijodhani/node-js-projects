@@ -23,7 +23,7 @@ const registerusers = async (req, res) => {
             email: email,
             password: password,
         })
-        return res.redirect('/login')
+        return res.redirect('/')
     } catch (error) {
         console.log(error);
     }

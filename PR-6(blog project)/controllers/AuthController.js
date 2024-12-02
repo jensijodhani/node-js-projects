@@ -61,6 +61,9 @@ const logoutUser = (req, res) => {
 }
 
 const addProduct = (req, res) => {
+    if (req.cookies['auth']) {
+        return res.redirect('/')
+    }
     return res.render('add')
 }
 

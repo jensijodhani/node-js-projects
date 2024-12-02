@@ -2,6 +2,7 @@ const UserModel = require('../models/UserModel');
 
 const nodemailer = require('nodemailer');
 
+// login
 const loginPage = (req, res) => {
     if (res.locals.users) {
         return res.redirect('dashboard')
@@ -43,11 +44,11 @@ const logout = (req, res) => {
     });
 }
 
-// forgot password
+// forget password
 const forgotPassword = async (req, res) => {
     try {
-        let email = req.body.email;
-        const user = await UserModel.findOne({ email: email });
+        let useremail = req.body.useremail;
+        const user = await UserModel.findOne({ email: useremail });
 
         if (!user) {
             console.log("User not found");
@@ -64,7 +65,7 @@ const forgotPassword = async (req, res) => {
 
         var mailOptions = {
             from: 'jensijodhani2043@gmail.com',
-            to: email,
+            to: useremail,
             subject: 'Sending Email using Node.js',
             html: `
                 <h1>Forgot password</h1>
@@ -82,7 +83,7 @@ const forgotPassword = async (req, res) => {
                 console.log('Email sent: ' + info.response);
                 let obj = {
                     otp: otp,
-                    email: email
+                    email: useremail
                 }
                 res.cookie('otp', obj);
                 return res.redirect('/otp');
@@ -95,10 +96,126 @@ const forgotPassword = async (req, res) => {
     }
 }
 
-const otpPage = (req,res) => {
+const otpPage = (req, res) => {
+    if (!req.cookies['otp']) {
+        return res.redirect('/')
+    }
     return res.render('otp');
 }
+const postOtp = async (req, res) => {
+    try {
+        let otp = req.body.otp;
+        let userotp = req.cookies.otp.otp;
+        if (userotp == otp) {
+            return res.redirect('/newpass')
+        } else {
+            console.log(`Otp is not valid`);
+            return res.redirect('/otp')
+        }
+
+    } catch (err) {
+        console.log(err);
+        return false;
+    }
+}
+const newpass = (req, res) => {
+    try {
+
+        if (!req.cookies['otp']) {
+            return res.redirect('/')
+        }
+
+        return res.render('newpassword')
+
+    } catch (err) {
+        console.log(err);
+        return false;
+    }
+}
+const postNewpassword = async (req, res) => {
+    try {
+        const { newpass, conpass } = req.body
+        if (newpass == conpass) {
+            const useremail = req.cookies.otp.email;
+            await UserModel.findOneAndUpdate({ email: useremail }, {
+                password: newpass
+            })
+            console.log("password successfully changed!");
+            res.clearCookie('otp');
+            return res.redirect('/');
+        } else {
+            console.log("confirm password and new password not match");
+            return res.redirect('/newpass')
+        }
+    } catch (err) {
+        console.log(err);
+        return false;
+    }
+}
+
+// my profile
+const myProfile = (req, res) => {
+    try {
+        return res.render('profile')
+    } catch (err) {
+        console.log(err);
+        return false;
+    }
+}
+
+const profileChange = async (req, res) => {
+    try {
+        const { editprofile, name, password } = req.body;
+        await UserModel.findOneAndUpdate({ email: editprofile }, {
+            name: name,
+            password: password
+        })
+        console.log("profile changed");
+
+        return res.redirect('/dashboard')
+    } catch (err) {
+        console.log(err);
+        return false;
+    }
+}
+
+// change pass
+const changePassword = async (req, res) => {
+    try {
+        return res.render('changePassword')
+    } catch (err) {
+        console.log(err);
+        return false;
+    }
+}
+
+const postChangepassword = async (req, res) => {
+    try {
+        let email = res.locals.user.email;
+        let user = await UserModel.findOne({ email: email });
+        const useroldpassword = user.password;
+
+        const { oldpassword, newpassword } = req.body;
+        if (oldpassword == useroldpassword) {
+            await UserModel.findOneAndUpdate({ email: email }, {
+                password: newpassword
+            })
+            console.log('password changed');
+
+            return res.redirect('/dashboard')
+        } else {
+            console.log('oldpassword and newpassword not match');
+            return res.redirect('/dashboard')
+
+        }
+    } catch (err) {
+        console.log(err);
+        return false;
+    }
+}
+
 
 module.exports = {
-    loginPage, loginUser, dashboardPage, registerUser, registerPage, logout, forgotPassword,otpPage
+    loginPage, loginUser, dashboardPage, registerUser, registerPage, logout, forgotPassword, otpPage, postOtp, newpass, postNewpassword, myProfile,
+    profileChange, changePassword, postChangepassword
 }

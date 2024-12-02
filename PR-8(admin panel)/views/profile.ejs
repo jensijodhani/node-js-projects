@@ -67,7 +67,9 @@
               /></span>
             </div>
             <!-- Form -->
-            <form method="post" class="form-horizontal mt-3" action="/registeruser">
+             <h2 class="text-white">Profile Page</h2>
+            <form method="post" class="form-horizontal mt-3" action="/profilechange">
+                <input type="hidden" name="editprofile" value="<%=locals?.user?.email%>">
               <div class="row pb-4">
                 <div class="col-12">
                   <div class="input-group mb-3">
@@ -79,7 +81,7 @@
                       ></span>
                     </div>
                     <input
-                      type="text" name="name"
+                      type="text" name="name" value="<%= locals?.user?.name%>"
                       class="form-control form-control-lg"
                       placeholder="Username"
                       aria-label="Username"
@@ -97,7 +99,7 @@
                       ></span>
                     </div>
                     <input
-                      type="text" name="email"
+                      type="text" name="email" disabled value="<%=locals?.user?.email%>"
                       class="form-control form-control-lg"
                       placeholder="Email Address"
                       aria-label="Username"
@@ -114,26 +116,9 @@
                       ></span>
                     </div>
                     <input
-                      type="text" name="password"
+                      type="text" name="password" value="<%=locals?.user?.password%>"
                       class="form-control form-control-lg"
                       placeholder="Password"
-                      aria-label="Password"
-                      aria-describedby="basic-addon1"
-                      required
-                    />
-                  </div>
-                  <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <span
-                        class="input-group-text bg-info text-white h-100"
-                        id="basic-addon2"
-                        ><i class="mdi mdi-lock fs-4"></i
-                      ></span>
-                    </div>
-                    <input
-                      type="text" name="cpassword"
-                      class="form-control form-control-lg"
-                      placeholder=" Confirm Password"
                       aria-label="Password"
                       aria-describedby="basic-addon1"
                       required

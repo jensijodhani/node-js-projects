@@ -10,6 +10,9 @@ app.set('view engine', 'ejs');
 
 const path = require('path');
 
+const cookieParser = require('cookie-parser')
+app.use(cookieParser());
+
 app.use('/', express.static(path.join(__dirname, '/public')))
 
 const passport = require('passport');
