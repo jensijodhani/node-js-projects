@@ -1,4 +1,3 @@
-const category = require('../models/CategoryModel');
 const CategoryModel=require('../models/CategoryModel');
 
 const addCategoryPage = (req,res)=>{
