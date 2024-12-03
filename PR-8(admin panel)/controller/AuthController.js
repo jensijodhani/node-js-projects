@@ -213,9 +213,6 @@ const postChangepassword = async (req, res) => {
     }
 }
 
-// category
-
-
 module.exports = {
     loginPage, loginUser, dashboardPage, registerUser, registerPage, logout, forgotPassword, otpPage, postOtp, newpass, postNewpassword, myProfile,
     profileChange, changePassword, postChangepassword
