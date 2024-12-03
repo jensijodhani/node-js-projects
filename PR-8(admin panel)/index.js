@@ -13,8 +13,11 @@ const path = require('path');
 const cookieParser = require('cookie-parser')
 app.use(cookieParser());
 
+const flash = require('connect-flash')
+
 app.use('/', express.static(path.join(__dirname, '/public')))
 
+//passport
 const passport = require('passport');
 const passportLocal = require('./config/passportLocal');
 const session = require('express-session');
@@ -29,6 +32,13 @@ app.use(session({
 app.use(passport.session());
 app.use(passport.initialize());
 app.use(passport.setUser);
+//passport 
+app.use(flash());
+
+app.use((req,res,next)=>{
+    res.locals.massage=req.flash();
+    return next();
+})
 
 app.use(express.urlencoded());
 
