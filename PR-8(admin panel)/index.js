@@ -32,7 +32,7 @@ app.use(passport.setUser);
 
 app.use(express.urlencoded());
 
-app.use('/', (require('./routes/indexRoutes')));
+app.use('/', (require('./routes/indexRoute')));
 
 app.listen(port, (err) => {
     if (err) {

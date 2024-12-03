@@ -206,13 +206,14 @@ const postChangepassword = async (req, res) => {
         } else {
             console.log('oldpassword and newpassword not match');
             return res.redirect('/dashboard')
-
         }
     } catch (err) {
         console.log(err);
         return false;
     }
 }
+
+// category
 
 
 module.exports = {

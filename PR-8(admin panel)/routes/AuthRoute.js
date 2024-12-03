@@ -24,8 +24,10 @@ routes.post('/postnewpassword', postNewpassword)
 //my profile
 routes.get('/myprofile', passport.checkUser, myProfile);
 routes.post("/profilechange", profileChange);
-routes.post('/postChangepassword', postChangepassword)
+
+//change pass
 routes.get('/changepassword', passport.checkUser, changePassword);
+routes.post('/postChangepassword', postChangepassword);
 
 
 
