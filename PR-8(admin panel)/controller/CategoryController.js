@@ -76,7 +76,7 @@ const updateCategory = async (req, res) => {
 //change status
 const changeStatus = async (req, res) => {
     try {
-        let id = req.body.id;
+        let id = req.query.id;
         let st = req.query.status;
 
         if (st == "active") {
@@ -84,8 +84,6 @@ const changeStatus = async (req, res) => {
                 status: "deactive"
             })
             console.log("status deactive");
-            
-            req.flash('success', 'status change')
             return res.redirect('/category/viewcategory')
         } else {
             await CategoryModel.findByIdAndUpdate(id, {
@@ -93,7 +91,7 @@ const changeStatus = async (req, res) => {
             })
             console.log("status active");
 
-            req.flash('warning', 'status change')
+            
             return res.redirect('/category/viewcategory')
         }
     } catch (err) {
