@@ -50,12 +50,13 @@
                       <tr>
                         <th scope="col">Category_No</th>
                         <th scope="col">Category_Name</th>
+                        <th scope="col">Subcategory</th>
                         <th scope="col">Actions</th>
                         <th scope="col">Status</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <% categories.map((cat,i)=>{
+                      <% category.map((cat,i)=>{
                         const {id,category_name}=cat;
                         %>
                         <tr>
@@ -68,17 +69,17 @@
                           </td>
 
                           <td>
-                            <a class="btn btn-danger me-2" href="/category/deletecategory?id=<%= cat.id %>">Delete</a>
-                            <a class="btn btn-success text-white" href="/category/editcategory?id=<%= cat.id %>">Edit</a>
+                            <a class="btn btn-danger me-2" href="/category/deletecategory?id=<%= id %>">Delete</a>
+                            <a class="btn btn-success text-white" href="/category/editcategory?id=<%= id %>">Edit</a>
                           </td>
 
                           <td>
                             <% if(cat.status == "active" ) { %>
-                              <a href="/category/changestatus?id=<%= cat.id %>&status=<%= cat.status %>" class="btn btn-success">
+                              <a href="/category/changestatus?id=<%+ cat.id %>&status=" class="btn btn-success">
                                 <%= cat.status %>
                               </a>
                               <% } else { %>
-                                <a href="/category/changestatus?id=<%= cat.id %>&status=<%= cat.status %>" class="btn btn-warning">
+                                <a href="/category/changestatus?id=<%+ cat.id %>&status=" class="btn btn-warning">
                                   <%= cat.status %>
                                 </a>
                                 <% } %>

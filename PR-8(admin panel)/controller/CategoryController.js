@@ -24,7 +24,7 @@ const insertCategory = async (req, res) => {
             category_name: req.body.category
         })
         console.log("category create");
-        req.flash('success','category create');
+        req.flash('success', 'category create');
         return res.redirect('/category/addcategory')
     } catch (err) {
         console.log(err);
@@ -37,7 +37,7 @@ const deleteCategory = async (req, res) => {
         let id = req.query.id;
         await CategoryModel.findByIdAndDelete(id);
         console.log(`user delete`);
-        req.flash('danger','category delete');
+        req.flash('danger', 'category delete');
         return res.redirect('back');
     } catch (err) {
         console.log(err);
@@ -73,6 +73,35 @@ const updateCategory = async (req, res) => {
     }
 }
 
+//change status
+const changeStatus = async (req, res) => {
+    try {
+        let id = req.body.id;
+        let st = req.query.status;
+
+        if (st == "active") {
+            await CategoryModel.findByIdAndUpdate(id, {
+                status: "deactive"
+            })
+            console.log("status deactive");
+            
+            req.flash('success', 'status change')
+            return res.redirect('/category/viewcategory')
+        } else {
+            await CategoryModel.findByIdAndUpdate(id, {
+                status: "active"
+            })
+            console.log("status active");
+
+            req.flash('warning', 'status change')
+            return res.redirect('/category/viewcategory')
+        }
+    } catch (err) {
+        console.log(err);
+        return false;
+    }
+}
+
 module.exports = {
-    addCategoryPage, viewCategoryPage, insertCategory, deleteCategory, editCategory, updateCategory
+    addCategoryPage, viewCategoryPage, insertCategory, deleteCategory, editCategory, updateCategory, changeStatus
 }
