@@ -26,7 +26,6 @@ const registerUser = async (req, res) => {
             email: email,
             password: password
         })
-        console.log("user successfully create");
         return res.redirect('dashboard');
     } catch (err) {
         console.log(err);
@@ -51,7 +50,6 @@ const forgotPassword = async (req, res) => {
         const user = await UserModel.findOne({ email: useremail });
 
         if (!user) {
-            console.log("User not found");
             return res.redirect('/')
         }
         const otp = Math.floor(Math.random() * 100000);
@@ -109,7 +107,6 @@ const postOtp = async (req, res) => {
         if (userotp == otp) {
             return res.redirect('/newpass')
         } else {
-            console.log(`Otp is not valid`);
             return res.redirect('/otp')
         }
 
@@ -140,11 +137,9 @@ const postNewpassword = async (req, res) => {
             await UserModel.findOneAndUpdate({ email: useremail }, {
                 password: newpass
             })
-            console.log("password successfully changed!");
             res.clearCookie('otp');
             return res.redirect('/');
         } else {
-            console.log("confirm password and new password not match");
             return res.redirect('/newpass')
         }
     } catch (err) {
@@ -170,8 +165,6 @@ const profileChange = async (req, res) => {
             name: name,
             password: password
         })
-        console.log("profile changed");
-
         return res.redirect('/dashboard')
     } catch (err) {
         console.log(err);
@@ -200,11 +193,8 @@ const postChangepassword = async (req, res) => {
             await UserModel.findOneAndUpdate({ email: email }, {
                 password: newpassword
             })
-            console.log('password changed');
-
             return res.redirect('/dashboard')
         } else {
-            console.log('oldpassword and newpassword not match');
             return res.redirect('/dashboard')
         }
     } catch (err) {

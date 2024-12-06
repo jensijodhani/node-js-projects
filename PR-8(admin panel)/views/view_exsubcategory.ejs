@@ -51,32 +51,36 @@
                         <th scope="col">Category_No</th>
                         <th scope="col">Category_Name</th>
                         <th scope="col">Subcategory</th>
+                        <th scope="col">Exubcategory</th>
                         <th scope="col">Actions</th>
                         <th scope="col">Status</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <% scategory.map((scat,i)=> { %>
+                      <% exscategory.map((exscat,i)=> { %>
                         <tr>
                           <td><%= ++i %></td>
                           <td>
-                            <%= scat.categoryId.category_name %>
+                            <%= exscat.categoryId.category_name %>
                           </td>
                           <td>
-                            <%= scat.subcategory %>
+                            <%= exscat.subcategoryId.subcategory %>
                           </td>
                           <td>
-                            <a class="btn btn-danger me-2" href="/subcategory/deletesubcategory?id=<%= scat.id %>">Delete</a>
-                            <a class="btn btn-info" href="/subcategory/editsubcategory?id=<%= scat.id %>">Edit</a>
+                            <%= exscat.exsubcategory %>
                           </td>
                           <td>
-                            <% if(scat.status == "active" ) { %>
-                              <a href="/subcategory/changestatus?id=<%= scat.id %>&status=<%= scat.status %>" class="btn btn-success">
-                                <%= scat.status %>
+                            <a class="btn btn-danger me-2" href="/exsubcategory/deleteexsubcategory?id=<%= exscat.id %>">Delete</a>
+                            <a class="btn btn-info" href="/exsubcategory/editexsubcategory?id=<%= exscat.id %>">Edit</a>
+                          </td>
+                          <td>
+                            <% if(exscat.status == "active" ) { %>
+                              <a href="/exsubcategory/changestatus?id=<%= exscat.id %>&status=<%= exscat.status %>" class="btn btn-success">
+                                <%= exscat.status %>
                               </a>
                               <% } else { %>
-                                <a href="/subcategory/changestatus?id=<%= scat.id %>&status=<%= scat.status %>" class="btn btn-warning">
-                                  <%= scat.status %>
+                                <a href="/exsubcategory/changestatus?id=<%= exscat.id %>&status=<%= exscat.status %>" class="btn btn-warning">
+                                  <%= exscat.status %>
                                 </a>
                                 <% } %>
                           </td>

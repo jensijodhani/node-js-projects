@@ -22,8 +22,7 @@ const insertCategory = async (req, res) => {
     try {
         await CategoryModel.create({
             category_name: req.body.category
-        })
-        console.log("category create");
+        });
         req.flash('success', 'category create');
         return res.redirect('/category/addcategory')
     } catch (err) {
@@ -36,7 +35,6 @@ const deleteCategory = async (req, res) => {
     try {
         let id = req.query.id;
         await CategoryModel.findByIdAndDelete(id);
-        console.log(`user delete`);
         req.flash('danger', 'category delete');
         return res.redirect('back');
     } catch (err) {
@@ -64,7 +62,6 @@ const updateCategory = async (req, res) => {
         await CategoryModel.findByIdAndUpdate(editid, {
             category_name: category,
         })
-        console.log("category update");
         return res.redirect('/category/viewcategory');
     }
     catch (err) {
@@ -83,15 +80,12 @@ const changeStatus = async (req, res) => {
             await CategoryModel.findByIdAndUpdate(id, {
                 status: "deactive"
             })
-            console.log("status deactive");
+            req.flash('danger', 'category deactive');
             return res.redirect('/category/viewcategory')
         } else {
             await CategoryModel.findByIdAndUpdate(id, {
                 status: "active"
             })
-            console.log("status active");
-
-            
             return res.redirect('/category/viewcategory')
         }
     } catch (err) {

@@ -42,27 +42,38 @@
 
             <div class="col-md-6">
               <div class="card">
-                <form class="form-horizontal" method="post" action="/subcategory/updatesubcategory">
-                  <input type="hidden" name="editid" value="<%= single.id %>">
+                <form class="form-horizontal" method="post" action="/exsubcategory/insertexsubcategory">
                   <div class="card-body">
-                    <h4 class="card-title">Edit Subcategory</h4>
+                    <h4 class="card-title">Add Exsubcategory</h4>
                     <div class="form-group row">
                       <label for="fname" class="col-sm-3 text-end control-label col-form-label">Category</label>
                       <div class="col-sm-9">
                         <select name="category" class="form-control">
                           <option>--select category--</option>
                           <% category.map((ca)=>{ %>
-                            <option <% if(single.categoryId.category_name == ca.category_name) { %> selected <% } %> value="<%= ca.id %>"><%= ca.category_name %></option>
+                            <option value="<%= ca.id %>"><%= ca.category_name %></option>
                           <% }) %>
-                        </select>  
+                        </select>   
                       </div>
                     </div>
 
                     <div class="form-group row">
-                      <label for="fname" class="col-sm-3 text-end control-label col-form-label">Subcategory</label>
+                        <label for="fname" class="col-sm-3 text-end control-label col-form-label">Subcategory</label>
+                        <div class="col-sm-9">
+                          <select name="subcategory" class="form-control">
+                            <option>--select subcategory--</option>
+                            <% subcategory.map((scat)=>{ %>
+                              <option value="<%= scat.id %>"><%= scat.subcategory %></option>
+                            <% }) %>
+                          </select>   
+                        </div>
+                      </div>
+
+                    <div class="form-group row">
+                      <label for="fname" class="col-sm-3 text-end control-label col-form-label">Exsubcategory</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" id="fname" name="subcategory" value="<%= single.subcategory %>"
-                          placeholder="Enter Subcategory Name" />
+                        <input type="text" class="form-control" id="fname" name="exsubcategory"
+                          placeholder="Enter Exsubcategory Name" />
                       </div>
                     </div>
 
