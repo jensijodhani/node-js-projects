@@ -56,7 +56,20 @@
                       </tr>
                     </thead>
                     <tbody>
-                     
+                      <% scategory.map((scat,i)=> { %>
+                        <tr>
+                          <td><%= ++i %></td>
+                          <td>
+                            <%= scat.categoryId.category_name %>
+                          </td>
+                          <td>
+                            <%= scat.subcategory %>
+                          </td>
+                          <td>
+                            <a class="btn btn-info" href="/subcategory/editsubcategory?id=<%= scat.id %>">Edit</a>
+                          </td>
+                        </tr>
+                    <% }) %>
                     </tbody>
                   </table>
                 </div>
