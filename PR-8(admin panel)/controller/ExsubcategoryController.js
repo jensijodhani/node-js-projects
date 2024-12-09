@@ -1,6 +1,8 @@
 const CategoryModel = require('../models/CategoryModel');
 const subcategoryModel = require('../models/SubcategoryModel');
 const ExsubcategoryModel = require('../models/ExsubcategoryModel');
+const subcategory = require('../models/SubcategoryModel');
+const exsubcategory = require('../models/ExsubcategoryModel');
 
 const viewExsubcategorypage = async (req, res) => {
     try {
@@ -47,9 +49,11 @@ const editExsubcategory = async (req, res) => {
     try {
         let id = req.query.id
         let category = await CategoryModel.find({});
-        let single = await subcategoryModel.findById(id).populate("categoryId").populate("subcategoryId")
+        let subcategory = await subcategoryModel.find({});
+        let single = await ExsubcategoryModel.findById(id).populate("categoryId").populate("subcategoryId")
         return res.render('edit_exsubcategory', {
             category,
+            subcategory,
             single
         })
     } catch (err) {
@@ -67,9 +71,49 @@ const deleteExsubcategory = async (req, res) => {
     } catch (err) {
         console.log(err);
         return false;
-    }  
+    }
+}
+
+const updateExsubcategory = async (req, res) => {
+    try {
+        const { editid, category, subcategory, exsubcategory } = req.body;
+        
+        await ExsubcategoryModel.findByIdAndUpdate(editid, {
+            categoryId: category,
+            subcategory: subcategory,
+            exsubcategory: exsubcategory
+        })
+        return res.redirect('/exsubcategory')
+    } catch (err) {
+        console.log(err);
+        return false;
+    }
+}
+
+//change status
+const changeStatus = async (req, res) => {
+    try {
+        let id = req.query.id;
+        let st = req.query.status;
+
+        if (st == "active") {
+            await ExsubcategoryModel.findByIdAndUpdate(id, {
+                status: "deactive"
+            })
+            req.flash('danger', 'category deactive');
+            return res.redirect('/exsubcategory')
+        } else {
+            await ExsubcategoryModel.findByIdAndUpdate(id, {
+                status: "active"
+            })
+            return res.redirect('/exsubcategory')
+        }
+    } catch (err) {
+        console.log(err);
+        return false;
+    }
 }
 
 module.exports = {
-    viewExsubcategorypage, addExsubcategorypage, insertExsubcategory,deleteExsubcategory,editExsubcategory
+    viewExsubcategorypage, addExsubcategorypage, insertExsubcategory, deleteExsubcategory, editExsubcategory, updateExsubcategory,changeStatus
 }
