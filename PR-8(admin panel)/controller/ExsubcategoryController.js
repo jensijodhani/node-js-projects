@@ -1,9 +1,6 @@
 const CategoryModel = require('../models/CategoryModel');
 const subcategoryModel = require('../models/SubcategoryModel');
 const ExsubcategoryModel = require('../models/ExsubcategoryModel');
-const subcategory = require('../models/SubcategoryModel');
-const exsubcategory = require('../models/ExsubcategoryModel');
-
 const viewExsubcategorypage = async (req, res) => {
     try {
         let exscategory = await ExsubcategoryModel.find({}).populate("categoryId").populate("subcategoryId");
@@ -77,7 +74,7 @@ const deleteExsubcategory = async (req, res) => {
 const updateExsubcategory = async (req, res) => {
     try {
         const { editid, category, subcategory, exsubcategory } = req.body;
-        
+
         await ExsubcategoryModel.findByIdAndUpdate(editid, {
             categoryId: category,
             subcategory: subcategory,
@@ -115,5 +112,5 @@ const changeStatus = async (req, res) => {
 }
 
 module.exports = {
-    viewExsubcategorypage, addExsubcategorypage, insertExsubcategory, deleteExsubcategory, editExsubcategory, updateExsubcategory,changeStatus
+    viewExsubcategorypage, addExsubcategorypage, insertExsubcategory, deleteExsubcategory, editExsubcategory, updateExsubcategory, changeStatus
 }
