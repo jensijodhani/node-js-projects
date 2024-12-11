@@ -1,6 +1,7 @@
 const CategoryModel = require('../models/CategoryModel');
 const subcategoryModel = require('../models/SubcategoryModel');
 const ExsubcategoryModel = require('../models/ExsubcategoryModel');
+
 const viewExsubcategorypage = async (req, res) => {
     try {
         let exscategory = await ExsubcategoryModel.find({}).populate("categoryId").populate("subcategoryId");
@@ -64,7 +65,7 @@ const deleteExsubcategory = async (req, res) => {
         let id = req.query.id;
         await ExsubcategoryModel.findByIdAndDelete(id);
         req.flash('danger', 'Exsubcategory delete');
-        return res.redirect('back');
+        return res.redirect('/exsubcategory');
     } catch (err) {
         console.log(err);
         return false;
@@ -111,6 +112,22 @@ const changeStatus = async (req, res) => {
     }
 }
 
+// ajax
+const ajaxsubcategory = async (req, res) => {
+    try {
+        const id = req.query.id;
+        const category = await subcategoryModel.find({ categoryId: id });
+        return res.send({
+            success: true,
+            message: "record fetch",
+            category,
+        });
+    } catch (err) {
+        console.log(err);
+        return false;
+    }
+};
+
 module.exports = {
-    viewExsubcategorypage, addExsubcategorypage, insertExsubcategory, deleteExsubcategory, editExsubcategory, updateExsubcategory, changeStatus
+    viewExsubcategorypage, addExsubcategorypage, insertExsubcategory, deleteExsubcategory, editExsubcategory, updateExsubcategory, changeStatus,ajaxsubcategory
 }

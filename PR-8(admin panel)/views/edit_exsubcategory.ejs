@@ -52,8 +52,8 @@
                       <div class="col-sm-9">
                         <select name="subcategory" class="form-control">
                           <option>--select subcategory--</option>
-                          <% category.map((scat)=>{ %>
-                            <option value="<%= scat.id %>"<% if(single.categoryId.category_name == scat.category_name) { %> selected <% } %> value="<%= scat.id %>"><%= scat.category_name %></option>
+                          <% category.map((cat)=>{ %>
+                            <option value="<%= cat.id %>"<% if(single.categoryId.category_name == cat.category_name) { %> selected <% } %> value="<%= cat.id %>"><%= cat.category_name %></option>
                           <% }) %>
                         </select>   
                       </div>
@@ -65,7 +65,7 @@
                           <select name="subcategory" class="form-control">
                             <option>--select subcategory--</option>
                             <% subcategory.map((scat)=>{ %>
-                              <option value="<%= scat.id %>"<% if(single.subcategoryId.subcategory == scat.subcategory) { %> selected <% } %> value="<%= scat.id %>"><%= scat.subcategory%></option>
+                              <option value="<%= scat.id %>"<% if(single.subcategoryId.subcategory == scat.subcategory) { %> selected <% } %> value="<%= scat.id %>"><%= scat.subcategory %></option>
                             <% }) %>
                           </select>   
                         </div>
