@@ -2,41 +2,70 @@ const CategoryModel = require('../models/CategoryModel');
 const subcategoryModel = require('../models/SubcategoryModel');
 const ExsubcategoryModel = require('../models/ExsubcategoryModel');
 const ProductModel = require('../models/ProductModel');
-const subcategory = require('../models/SubcategoryModel');
 
-const productviewPage =(req,res)=>{
-    return res.render('view_product')
-}
-
-const addproductPage =async(req,res)=>{
-    try{
-        let category = await CategoryModel.find({});
-        return res.render('add_product',{
-            category
+const productviewPage = async (req, res) => {
+    try {
+        let product = await ProductModel.find({}).populate("categoryId").populate("subcategoryId").populate("exsubcategoryId");
+        return res.render('view_product', {
+            product
         })
-    }catch(err){
+    } catch (err) {
         console.log(err);
         return false;
     }
 }
 
-const ajaxSubcategory =async(req,res)=>{
-    try{
-        let id = req.query.id;
-        let exsubcat = await ExsubcategoryModel.find({subcategoryId:id });
+const addproductPage = async (req, res) => {
+    try {
+        let category = await CategoryModel.find({});
+        let subcategory = await subcategoryModel.find({});
+        let exsubcategory = await ExsubcategoryModel.find({});
+        return res.render('add_product', {
+            category,
+            subcategory,
+            exsubcategory
+        })
+    } catch (err) {
+        console.log(err);
+        return false;
+    }
+}
 
-        return res.send({    
+const insertProduct = async (req, res) => {
+    try {
+        const { category, subcategory, exsubcategory } = req.body;
+        await ExsubcategoryModel.create({
+            categoryId: category,
+            subcategoryId: subcategory,
+            exsubcategoryId: exsubcategory
+        })
+        return res.redirect('/product');
+        console.log(req.body);
+
+
+    } catch (err) {
+        console.log(err);
+        return false;
+    }
+}
+
+// ajax ex
+const ajaxSubcategory = async (req, res) => {
+    try {
+        let id = req.query.id;
+        let exsubcat = await ExsubcategoryModel.find({ subcategoryId: id });
+        return res.send({
             success: true,
-            message:"data fetch",
+            message: "data fetch",
             exsubcat
         })
 
-    }catch(err){
+    } catch (err) {
         console.log(err);
         return false;
     }
 }
 
-module.exports={
-    productviewPage,addproductPage,ajaxSubcategory
+module.exports = {
+    productviewPage, addproductPage, insertProduct, ajaxSubcategory
 }

@@ -41,7 +41,7 @@
 
                         <div class="col-md-6">
                             <div class="card">
-                                <form class="form-horizontal" method="post" action="/exsubcategory/insertexsubcategory">
+                                <form class="form-horizontal" method="post" action="/product/insertproduct">
                                     <div class="card-body">
                                         <h4 class="card-title">Add Exsubcategory</h4>
                                         <div class="form-group row">
@@ -75,8 +75,7 @@
                                             <label for="fname"
                                                 class="col-sm-3 text-end control-label col-form-label">Exsubcategory</label>
                                             <div class="col-sm-9">
-                                                <select id="exsubcategory" name="exsubcategory"
-                                                    class="form-control">
+                                                <select id="exsubcategory" name="exsubcategory" class="form-control">
                                                     <option>--select exsubcategory--</option>
                                                 </select>
                                             </div>
@@ -128,7 +127,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <script>
-        const categoryRecord = (req, res) => {
+        const categoryRecord = () => {
             let catagory = document.getElementById('category').value
             $.ajax({
                 type: 'GET',
@@ -140,7 +139,7 @@
                     category.map((subcat) => {
                         tbl += `
                             <option value=${subcat._id}>${subcat.subcategory}</option>  
-            `
+                         `
                     })
                     document.getElementById('subcategory').innerHTML = tbl;
                 }
@@ -159,13 +158,13 @@
                     exsubcat.map((exsub) => {
                         tbl += `
                         <option value=${exsub._id}>${exsub.exsubcategory}</option>  
-
-                    `
+                        `
                     })
                     document.getElementById('exsubcategory').innerHTML = tbl;
                 }
             })
         }
+
     </script>
 
 
