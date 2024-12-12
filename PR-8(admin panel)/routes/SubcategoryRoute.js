@@ -13,6 +13,7 @@ routes.get('/editsubcategory',editSubcategory);
 routes.post('/updatesubcategory',updateSubcategory);
 routes.get('/deletesubcategory',deleteSubcategory);
 
+// changeStatus
 routes.get('/changestatus', changeStatus);
 
 

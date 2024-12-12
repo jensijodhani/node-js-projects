@@ -129,5 +129,5 @@ const ajaxsubcategory = async (req, res) => {
 };
 
 module.exports = {
-    viewExsubcategorypage, addExsubcategorypage, insertExsubcategory, deleteExsubcategory, editExsubcategory, updateExsubcategory, changeStatus,ajaxsubcategory
+    viewExsubcategorypage, addExsubcategorypage, insertExsubcategory, deleteExsubcategory, editExsubcategory, updateExsubcategory, changeStatus, ajaxsubcategory
 }

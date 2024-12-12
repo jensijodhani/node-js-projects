@@ -31,14 +31,13 @@
       <!-- ============================================================== -->
       <!-- Start Page Content -->
       <!-- ============================================================== -->
+       
       <div class="row">
         <% if(locals.massage.success) { %>
           <div class="alert alert-success" role="alert">
             <%= locals.massage.success %>
           </div>
           <% } %>
-
-
 
             <div class="col-md-6">
               <div class="card">
@@ -54,8 +53,8 @@
                             <option value="<%= ca.id %>">
                               <%= ca.category_name %>
                             </option>
-                            <% }) %>
-                        </select>
+                            <% }) %>   
+                        </select> 
                       </div>
                     </div>
 
@@ -64,7 +63,6 @@
                       <div class="col-sm-9">
                         <select id="subcategory" name="subcategory" class="form-control">
                           <option>--select subcategory--</option>
-
                         </select>
                       </div>
                     </div>

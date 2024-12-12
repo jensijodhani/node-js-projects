@@ -13,6 +13,7 @@ routes.get('/deletecategory',deleteCategory);
 routes.get('/editcategory',passport.checkUser,editCategory);
 routes.post('/updatecategory', updateCategory);
 
+// changeStatus
 routes.get('/changestatus', changeStatus);
 
 

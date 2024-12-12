@@ -62,7 +62,7 @@
                     <div class="form-group row">
                         <label for="fname" class="col-sm-3 text-end control-label col-form-label">Subcategory</label>
                         <div class="col-sm-9">
-                          <select name="subcategory" class="form-control">
+                          <select id="subcategory" name="subcategory" class="form-control">
                             <option>--select subcategory--</option>
                             <% subcategory.map((scat)=>{ %>
                               <option value="<%= scat.id %>"<% if(single.subcategoryId.subcategory == scat.subcategory) { %> selected <% } %> value="<%= scat.id %>"><%= scat.subcategory %></option>
