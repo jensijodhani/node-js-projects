@@ -25,8 +25,8 @@ const ajaxSubcategory =async(req,res)=>{
         let id = req.query.id;
         let exsubcat = await ExsubcategoryModel.find({subcategoryId:id });
 
-        return res.send({
-            success:true,
+        return res.send({    
+            success: true,
             message:"data fetch",
             exsubcat
         })
