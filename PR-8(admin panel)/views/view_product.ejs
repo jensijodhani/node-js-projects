@@ -1,6 +1,6 @@
 <%- include('header') %>
 
-  <div class="page-wrapper">
+<div class="page-wrapper">
     <!-- ============================================================== -->
     <!-- Bread crumb and right sidebar toggle -->
     <!-- ============================================================== -->
@@ -32,89 +32,99 @@
       <!-- Start Page Content -->
       <!-- ============================================================== -->
       <div class="row">
-
-        <div class="row">
-          <% if(locals.massage.danger) { %>
-            <div class="alert alert-danger" role="alert">
-              <%= locals.massage.danger %>
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title mb-0">Static Table</h5>
             </div>
-            <% } %>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Id</th>
+                  <th scope="col">Catagory</th>
+                  <th scope="col">SubCatagory</th>
+                  <th scope="col">ExSubCatagory</th>
+                  <th scope="col">Product name</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Image</th>
+                  <th scope="col">Action</th>
+                  <th scope="col">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% productdata.map((p,i)=>{ %>
+                  <tr>      
+                      <th scope="row">
+                          <%= ++i %>
+                      </th>
 
-              <div class="col-12">
-                <div class="card">
-                  <div class="card-body">
-                    <h5 class="card-title mb-0">Static Table</h5>
-                  </div>
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th scope="col">Category_No</th>
-                        <th scope="col">Category_Name</th>
-                        <th scope="col">Subcategory</th>
-                        <th scope="col">Exubcategory</th>
-                        <th scope="col">Actions</th>
-                        <th scope="col">Status</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <% product.map((exscat,i)=> { %>
-                        <tr>
-                          <td><%= ++i %></td>
-                          <td>
-                            <%= exscat.categoryId.category_name %>
-                          </td>
-                          <td>
-                            <%= exscat.subcategoryId.subcategory %>
-                          </td>
-                          <td>
-                            <%= exscat.exsubcategoryId.exsubcategory %>
-                          </td>
-                          <td>
-                            <a class="btn btn-danger me-2" href="/exsubcategory/deleteexsubcategory?id=<%= exscat.id %>">Delete</a>
-                            <a class="btn btn-info" href="/exsubcategory/editexsubcategory?id=<%= exscat.id %>">Edit</a>
-                          </td>
-                          <td>
-                            <% if(exscat.status == "active" ) { %>
-                              <a href="/exsubcategory/changestatus?id=<%= exscat.id %>&status=<%= exscat.status %>" class="btn btn-success">
-                                <%= exscat.status %>
-                              </a>
-                              <% } else { %>
-                                <a href="/exsubcategory/changestatus?id=<%= exscat.id %>&status=<%= exscat.status %>" class="btn btn-warning">
-                                  <%= exscat.status %>
-                                </a>
-                                <% } %>
-                          </td>
-                        </tr>
-                    <% }) %>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+                      
+                      <td>
+                          <%= p.catagoryId.catagory_name %>
+                      </td>
+                      <td>
+                        <%= p.subcatagoryId.subcatagory %>
+                      </td>
+                      <td>
+                          <%= p.exsubcatagoryId.exsubcatagory %>
+                      </td>
+                      <td>
+                        <%= p.name %>
+                      </td>
+                      <td>
+                        <%= p.price %>
+                      </td>
+                      <td>
+                        <%= p.description %>
+                      </td>
+                      <td>
+                        <img src="/<%= p.image %>" width="70">
+                      </td>
+                      <td>
+                        <a href="/product/deleteproduct?id=<%= p.id  %>" class="btn btn-danger">Delete</a> 
+                        <a href="/product/editproduct?id=<%= p.id  %>" class="btn btn-primary">Edit</a>
+
+                      </td>
+
+                      <td>
+                        <% if( p.status == "active") { %>
+                          <a href="/product/changeproduct?id=<%= p.id %>&status=<%= p.status %>" class="btn btn-success"> <%= p.status %>  </a>
+                      <% } else { %>
+                        <a href="/product/changeproduct?id=<%= p.id %>&status=<%= p.status %>" class="btn btn-warning"> <%= p.status %>  </a>
+                   <%   } %>
+                      </td>
+
+                  </tr>
+                  <% }) %>
+               
+              </tbody>
+            </table>
+          </div>
+         
         </div>
-        <!-- ============================================================== -->
-        <!-- End PAge Content -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Right sidebar -->
-        <!-- ============================================================== -->
-        <!-- .right-sidebar -->
-        <!-- ============================================================== -->
-        <!-- End Right sidebar -->
-        <!-- ============================================================== -->
       </div>
       <!-- ============================================================== -->
-      <!-- End Container fluid  -->
+      <!-- End PAge Content -->
       <!-- ============================================================== -->
       <!-- ============================================================== -->
-      <!-- footer -->
+      <!-- Right sidebar -->
       <!-- ============================================================== -->
-      <footer class="footer text-center">
-        All Rights Reserved by Matrix-admin. Designed and Developed by
-        <a href="https://www.wrappixel.com">WrapPixel</a>.
-      </footer>
+      <!-- .right-sidebar -->
       <!-- ============================================================== -->
-      <!-- End footer -->
+      <!-- End Right sidebar -->
       <!-- ============================================================== -->
     </div>
+    <!-- ============================================================== -->
+    <!-- End Container fluid  -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- footer -->
+    <!-- ============================================================== -->
+    
+    <!-- ============================================================== -->
+    <!-- End footer -->
+    <!-- ============================================================== -->
+  </div>
 
-    <%- include('footer') %>
+<%- include('footer') %>

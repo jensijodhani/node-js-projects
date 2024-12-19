@@ -67,9 +67,9 @@
               /></span>
             </div>
             <!-- Form -->
-             <h2 class="text-white">Profile Page</h2>
+            <h2 class="text-white">Profile Page</h2>
             <form method="post" class="form-horizontal mt-3" action="/profilechange">
-                <input type="hidden" name="editprofile" value="<%=locals?.user?.email%>">
+                <input type="hidden" name="editprofile" value="<%= locals?.user?.email %>">
               <div class="row pb-4">
                 <div class="col-12">
                   <div class="input-group mb-3">
@@ -81,7 +81,7 @@
                       ></span>
                     </div>
                     <input
-                      type="text" name="name" value="<%= locals?.user?.name%>"
+                      type="text" name="name" value="<%= locals?.user?.name %>"
                       class="form-control form-control-lg"
                       placeholder="Username"
                       aria-label="Username"
@@ -99,7 +99,7 @@
                       ></span>
                     </div>
                     <input
-                      type="text" name="email" disabled value="<%=locals?.user?.email%>"
+                      type="text" name="email" disabled value="<%= locals?.user?.email %>"
                       class="form-control form-control-lg"
                       placeholder="Email Address"
                       aria-label="Username"
@@ -116,7 +116,7 @@
                       ></span>
                     </div>
                     <input
-                      type="text" name="password" value="<%=locals?.user?.password%>"
+                      type="text" name="password" value="<%= locals?.user?.password %>"
                       class="form-control form-control-lg"
                       placeholder="Password"
                       aria-label="Password"
@@ -124,6 +124,7 @@
                       required
                     />
                   </div>
+                
                 </div>
               </div>
               <div class="row border-top border-secondary">
@@ -169,7 +170,7 @@
     <!-- ============================================================== -->
     <!-- This page plugin js -->
     <!-- ============================================================== -->
-    <script>   
+    <script>
       $(".preloader").fadeOut();
     </script>
   </body>

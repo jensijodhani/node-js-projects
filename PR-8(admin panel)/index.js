@@ -1,40 +1,41 @@
 const express = require('express');
 
-const port = 8000;
-  
+const port = 9000;
+
 const app = express();
 
-const db = require('./config/db');
-
-app.set('view engine', 'ejs');
+app.set('view engine','ejs')
 
 const path = require('path');
 
-const cookieParser = require('cookie-parser')
+const db = require('./config/db');
+
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
+
+const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 
 const flash = require('connect-flash')
 
-app.use('/', express.static(path.join(__dirname, '/public')))
-
-//passport
+app.use('/',express.static(path.join(__dirname,'public')));
+app.use(cookieParser());
 const passport = require('passport');
 const passportLocal = require('./config/passportLocal');
 const session = require('express-session');
 app.use(session({
-    secret: 'rnwadmin',
-    resave: true,
-    saveUninitialized: true,
-    cookie: {
-        maxAge: 1000 * 60 * 60 * 24
-    }    
+    secret:'rnwadmin',
+    resave : true,
+    saveUninitialized:true,
+    cookie:{
+        maxAge:1000*60*60*24
+    }
 }))
 app.use(passport.session());
-app.use(passport.initialize());
+app.use(passport.initialize());  
 app.use(passport.setUser);
-//passport 
-app.use(flash());
 
+app.use(flash());
+  
 app.use((req,res,next)=>{
     res.locals.massage=req.flash();
     return next();
@@ -42,12 +43,13 @@ app.use((req,res,next)=>{
 
 app.use(express.urlencoded());
 
-app.use('/', (require('./routes/indexRoute')));
+app.use('/',require('./routes/indexRoute')); 
 
-app.listen(port, (err) => {
-    if (err) {
+app.listen(port,(err)=>{
+    if(err){
         console.log(err);
         return false;
     }
     console.log(`server is start on port :- ${port}`);
+    
 })
