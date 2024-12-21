@@ -50,7 +50,7 @@
                     <select name="catagory" class="form-control">
                         <option value="">---select catagory---</option>
                        <% catagory.map((cat) => { %>
-                        <% if (cat.catagory_name==single.catagoryId.catagory_name) { %>
+                        <% if (cat.catagory_name==single.catagoryId?.catagory_name) { %>
                           <option selected value="<%= cat.id %>">
                               <%= cat.catagory_name %>
                           </option>

@@ -25,7 +25,7 @@ const session = require('express-session');
 app.use(session({
     secret:'rnwadmin',
     resave : true,
-    saveUninitialized:true,
+    saveUninitialized:true,  
     cookie:{
         maxAge:1000*60*60*24
     }

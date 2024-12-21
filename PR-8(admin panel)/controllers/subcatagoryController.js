@@ -1,9 +1,6 @@
 const catagoryuser = require('../models/catagoryModal')
 const subcatagoryuser = require('../models/subcatagoryModal')
 
-
-const routes = require('../routes/subcatagoryRoute')
-
 const subCatagory = async (req , res) => {
     try {
         let subcatagory = await subcatagoryuser.find({}).populate("catagoryId")
@@ -35,7 +32,6 @@ const insertsubCatagory = async (req , res) => {
             catagoryId : catagory,
             subcatagory : subcatagory,
         })
-        console.log("subcatagory craete");
         return res.redirect('/subcatagory')
     } catch (err) {
         console.log(err);
@@ -47,6 +43,7 @@ const deletesubCatagory = async (req , res) =>{
     try {
         const id = req.query.id;
         await subcatagoryuser.findByIdAndDelete(id);
+        req.flash('danger', 'subcategory delete');
         return res.redirect('/subcatagory');
     } catch (err) {
         console.log(err);
@@ -83,6 +80,7 @@ const updatesubCatagory = async (req , res) => {
     }
 }
 
+// change status
 const changesubStatus = async (req , res) => {
     try {
         let id = req.query.id;

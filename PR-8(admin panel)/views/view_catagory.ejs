@@ -32,6 +32,12 @@
       <!-- Start Page Content -->
       <!-- ============================================================== -->
       <div class="row">
+        <% if(locals.massage.danger) { %>
+          <div class="alert alert-danger" role="alert">
+            <%= locals.massage.danger %>
+          </div>
+        <% } %>
+
         <div class="col-12">
           <div class="card">
             <div class="card-body">
@@ -53,7 +59,7 @@
                         <td><%= val.catagory_name %></td>
                         <td>
                           <a href="/catagory/deletecatagory?id=<%= val.id  %>" class="btn btn-danger">Delete</a> 
-                          <a href="/catagory/editcatagory?id=<%= val.id  %>" class="btn btn-primary">Edit</a>
+                          <a href="/catagory/editcatagory?id=<%= val.id  %>" class="btn btn-info">Edit</a>
                         </td>
                         <td>
                           <% if( val.status == "active") { %>

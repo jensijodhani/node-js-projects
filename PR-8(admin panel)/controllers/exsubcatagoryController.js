@@ -2,8 +2,6 @@ const catagoryuser = require('../models/catagoryModal')
 const subcatagoryuser = require('../models/subcatagoryModal')
 const exsubcatagoryuser = require('../models/exsubcatagoryModal')
 
-const routes = require('../routes/exsubcatagoryRoute');
-
 const exsubCatagory = async(req , res) => {
     try {
         let exsubcatagorydata = await exsubcatagoryuser.find({}).populate("catagoryId").populate("subcatagoryId");
@@ -51,7 +49,7 @@ const deleteexsubCatagory = async (req , res) =>{
     try {
         const id = req.query.id;
         await exsubcatagoryuser.findByIdAndDelete(id);
-        req.flash('danger', 'category delete');
+        req.flash('danger', 'exsubcategory delete');
         return res.redirect('/exsubcatagory');
     } catch (err) {
         console.log(err);
@@ -78,9 +76,7 @@ const editexsubCatagory = async (req , res) =>{
 
 const updateexsubCatagory = async (req , res) => {
     try {
-        const { editid, catagory, subcatagory , exsubcatagory } = req.body;
-        console.log(req.body);
-        
+        const { editid, catagory, subcatagory , exsubcatagory } = req.body;        
         await exsubcatagoryuser.findByIdAndUpdate(editid, {
             catagoryId: catagory,
             subcatagoryId: subcatagory ,
@@ -93,6 +89,7 @@ const updateexsubCatagory = async (req , res) => {
     }
 }
 
+// change status
 const changeexsubStatus = async (req , res) => {
     try {
         let id = req.query.id;
@@ -115,6 +112,7 @@ const changeexsubStatus = async (req , res) => {
     }
 }
 
+// ajax
 const ajaxgetCatagory = async (req , res) => {
     try {
         let id = req.query.id;

@@ -70,6 +70,7 @@ const  updateCatagory = async (req , res) => {
     }
 }
 
+// change status
 const changeStatus = async (req , res) => {
     try {
         let id = req.query.id;

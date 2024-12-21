@@ -32,7 +32,7 @@
     <!-- Start Page Content -->
     <!-- ============================================================== -->
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-10">
         <div class="card">
           <form class="form-horizontal" enctype="multipart/form-data" method="post" action="/product/insertproduct">
             <div class="card-body">
@@ -47,7 +47,7 @@
                 >
                 <div class="col-sm-9">
                  <select class="form-control" name="catagory" onchange="categoryRecord()" id="catagory"> 
-                    <option value=""> ---- select  catagory ----</option>
+                    <option value=""> ---- select catagory ----</option>
                     <% catagory.map((c)=>{ %>
                         <option value="<%= c.id  %>">
                           <%= c.catagory_name %> 
@@ -79,7 +79,7 @@
                 >
                 <div class="col-sm-9">
                     <select id="exsubcatagory" name="exsubcatagory"  class="form-control">
-                      <option value=""> ---- select ex catagory ----</option>
+                      <option value=""> ---- select exsubcatagory ----</option>
                       <% exsubcatagory.map((c)=>{ %>
                           <option value="<%= c.id  %>">
                             <%= c.exsubcatagory %> 
@@ -218,9 +218,6 @@
         `
       })
       document.getElementById("subcatagory").innerHTML = tbl;
-
-
-
     }
   })
 }
@@ -242,14 +239,8 @@
         `
       })
       document.getElementById("exsubcatagory").innerHTML = tbl;
-
-
-
     }
   })
 }
-
-
-
-        
+      
 </script>

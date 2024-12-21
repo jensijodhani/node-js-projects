@@ -6,7 +6,6 @@ const productuser = require('../models/productModal')
 const fs = require('fs')
 const path = require('path')
 
-
 const   Product = async(req , res) => {
     try {
         let productdata = await productuser.find({}).populate("catagoryId").populate("subcatagoryId").populate("exsubcatagoryId");
@@ -18,6 +17,7 @@ const   Product = async(req , res) => {
         return false;
     }
 } 
+
 const addProduct = async (req , res) => {
     try {
         let catagory = await catagoryuser.find({});
@@ -38,8 +38,6 @@ const insertProduct = async (req , res) => {
     try {
 
         const {catagory, subcatagory, exsubcatagory, name, description, price} = req.body;
-        console.log(req.file.path);
-        
         await productuser.create({
             catagoryId : catagory,
             subcatagoryId : subcatagory,
@@ -50,7 +48,6 @@ const insertProduct = async (req , res) => {
             image: req.file.path,
 
         })
-        console.log("product craete");
         return res.redirect('/product')
     } catch (err) {
         console.log(err);
@@ -62,6 +59,7 @@ const deleteProduct = async (req, res) => {
     try {
         const id = req.query.id;
         await productuser.findByIdAndDelete(id);
+        req.flash('danger', 'product delete');
         return res.redirect('/product');
     } catch (err) {
         console.log(err);
@@ -75,7 +73,6 @@ const editProduct = async (req , res) =>{
         let catagory = await catagoryuser.find({});
         let subcatagory = await subcatagoryuser.find({});
         let exsubcatagory = await exsubcatagoryuser.find({});
-
         let single = await productuser.findById(id).populate("catagoryId").populate("subcatagoryId").populate("exsubcatagoryId")
         return res.render('edit_product', {
             catagory,
@@ -119,17 +116,14 @@ const updateProduct = async (req , res) => {
                 image: single.image,
             })
             return res.redirect('/product');
-
-        }
-
-
-       
+        }   
     } catch (err) {
         console.log(err);
         return false;
     }
 }
 
+// change status
 const changeProduct = async (req , res) => {
     try {
         let id = req.query.id;
@@ -151,6 +145,7 @@ const changeProduct = async (req , res) => {
     }
 }
 
+// ajax
 const ajaxgetCatagory = async (req , res) => {
     try {
         let id = req.query.id;
@@ -165,6 +160,7 @@ const ajaxgetCatagory = async (req , res) => {
         return false;
     }
 }
+
 const ajaxgetsubCatagory = async (req , res) => {
     try {
         let id = req.query.id;
