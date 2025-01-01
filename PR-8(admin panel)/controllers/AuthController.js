@@ -95,6 +95,7 @@ const forgotPassword = async (req, res) => {
     }
 }
 
+// otp send
 const otpPage = (req, res) => {
     if (!req.cookies['otp']) {
         return res.redirect('/')

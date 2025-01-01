@@ -18,7 +18,7 @@ app.use(cookieParser());
 const flash = require('connect-flash')
 
 app.use('/',express.static(path.join(__dirname,'public')));
-app.use(cookieParser());
+
 const passport = require('passport');
 const passportLocal = require('./config/passportLocal');
 const session = require('express-session');

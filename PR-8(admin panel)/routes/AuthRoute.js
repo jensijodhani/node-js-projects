@@ -27,10 +27,4 @@ routes.post('/profilechange', profileChange);
 routes.post('/postChangepassword', postChangepassword );
 routes.get('/changepassword',passport.checkUser,changePassword );
 
-
-
-
-
-
-
 module.exports = routes;

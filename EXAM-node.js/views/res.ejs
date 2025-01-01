@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 420px;
+        }
+
+        .glass-card h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .glass-input {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            width: 100%;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            color: #ffffff;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .glass-input:focus {
+            border-color: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .glass-btn {
+            background: linear-gradient(90deg, #4facfe, #00f2fe);
+            color: #ffffff;
+            padding: 0.75rem;
+            width: 100%;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .glass-btn:hover {
+            background: linear-gradient(90deg, #3a8dfe, #00d8fe);
+        }
+
+        .glass-text {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .glass-text a {
+            color: #4facfe;
+            text-decoration: none;
+        }
+
+        .glass-text a:hover {
+            text-decoration: underline;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="glass-card">
+        <h2>Register</h2>
+        <form action="/register" method="post" onsubmit="return validateForm()">
+
+            <input 
+                type="text" 
+                id="name" 
+                name="name" 
+                class="glass-input" 
+                placeholder="Enter your name">
+
+            <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                class="glass-input" 
+                placeholder="Enter your email">
+
+            <input 
+                type="password" 
+                id="password" 
+                name="password" 
+                class="glass-input" 
+                placeholder="Enter your password">
+
+            <button type="submit" class="glass-btn">Register Now</button>
+        </form>
+        <p class="glass-text">Already have an account? <a href="/login">Login</a></p>
+    </div>
+</body>
+</html>
